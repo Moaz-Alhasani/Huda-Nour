@@ -1,0 +1,92 @@
+
+html {
+    box-sizing: border-box;
+    font-size: 100%; // default is 16px in edge, and this ensures that the elements take the full size of the browser
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+.container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Concert One", sans-serif; // background-color: ;
+    // color: ;
+}
+
+.custom-placeholder::placeholder {
+    color: white;
+}
+
+// Visibility
+.hide-for-mobile {
+    @include breakpoint-down(medium) {
+        display: none;
+    }
+}
+
+.hide-for-desktop {
+    @include breakpoint-up(large) {
+        display: none;
+    }
+}
+.active {
+    background-color: $main-color;
+    color: white;
+}
+.main-title {
+    text-align: center;
+    position: relative;
+    margin: 60px auto;
+    padding: 3px 20px;
+    border: 1px solid #2ca4ab;
+    border-radius: 6px;
+    width: 220px;
+    color: #2ca4ab;
+
+    @include breakpoint-up(medium) {
+        font-size: 2rem;
+    }
+
+    @include breakpoint-up(large) {
+        font-size: 3rem;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #2ca4ab;
+        border-radius: 50%;
+        top: 50%;
+        left: 110%;
+        transform: translateY(-50%);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #2ca4ab;
+        border-radius: 50%;
+        top: 50%;
+        right: 110%;
+        transform: translateY(-50%);
+    }
+}

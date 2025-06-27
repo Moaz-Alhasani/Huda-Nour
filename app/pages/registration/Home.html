@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/dist/style.css">
+
+    <style>
+        .hero {
+            height: calc(100vh - 55px);
+            background-image: url("/static/app/images/haj\ 8.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-y: -150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                background-position-y: -550px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero {
+                background-image: url("/static/app/images/haj\ 8.jpg");
+                background-size: 100% 100vh;
+                background-position-y: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="overlay has-fade hide-for-desktop"></div>
+        <nav class="container">
+            <a href="http://localhost:5000/" class="header__logo">
+                <img class="nav__logo" src="/app/images/R.png" alt="Logo">
+            </a>
+
+            <div id="btnHamburger" class="header__toggle hide-for-desktop">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="header__links hide-for-mobile">
+                <a href="">الرئيسية</a>
+                <a href="http://127.0.0.1:8000/search">البحث في القرآن</a>
+                <a href="http://localhost:5000/api/v1/admin/news">الأخبار</a>
+                <a href="http://localhost:5000/IslamicInfo">معلومات إسلامية أساسية</a>
+                <a href="http://localhost:5000/Quez">إختبار المعلومات</a>
+                <a href="http://localhost:5000/api/v1/user/register">التسجيل</a>
+            </div>
+        </nav>
+        <div class="header__menu has-fade hide-for-desktop">
+                <a href="">الرئيسية</a>
+                <a href="http://127.0.0.1:8000/search">البحث في القرآن</a>
+                <a href="http://localhost:5000/api/v1/admin/news">الأخبار</a>
+                <a href="http://localhost:5000/IslamicInfo">معلومات إسلامية أساسية</a>
+                <a href="http://localhost:5000/Quez">إختبار المعلومات</a>
+                <a href="http://localhost:5000/api/v1/user/register">التسجيل</a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero__overlay"></div>
+        <main class="main">
+            <section class="hero__title">هُدىً لِعَقْلِكَ وَنُورٌ لِقَلْبِكَ</section>
+        </main>
+    </div>
+
+    <div class="services">
+        <h3 class="main-title">الخَدمات</h3>
+        <div class="services__grid">
+            <div class="service-card">
+                <h4 class="service-card__title">البحث الدلالي في القرآن</h4>
+                <p class="service-card__description">توفير ميزة البحث الدلالي التي تمكن المستخدمين من البحث في نصوص القرآن الكريم باستخدام جمل كاملة أو كلمات مفتاحية.</p>
+            </div>
+
+            <div class="service-card">
+                <h4 class="service-card__title">عرض آخر أخبار العالم الإسلامي</h4>
+                <p class="service-card__description">تبرز أهمية وجود منصة إخبارية خاصة بالمسلمين كمصدر حيوي للمعلومات. من خلال هذه المنصات، يستطيع المسلمون الحصول على تغطية دقيقة للأحداث.</p>
+            </div>
+
+            <div class="service-card">
+                <h4 class="service-card__title">عرض معلومات إسلامية أساسية</h4>
+                <p class="service-card__description">توفير محتوى متنوع وشامل حول أساسيات الدين الإسلامي.</p>
+            </div>
+
+            <div class="service-card">
+                <h4 class="service-card__title">نظام الاختبارات التفاعلي لقياس مستوى المستخدم</h4>
+                <p class="service-card__description">
+                    - تقديم اختبارات تفاعلية (كويزات) بأسئلة اختيار من متعدد.<br>
+                    - تحليل النتائج لتحديد نقاط القوة والضعف.<br>
+                    - تغيير ترتيب الإجابات عند الإعادة لضمان الإنصاف.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/Home.js"></script>
+</body>
+
+</html>

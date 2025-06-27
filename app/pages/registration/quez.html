@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق الاختبار</title>
+    <link rel="stylesheet" href="/static/dist/style.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="pop-up">
+            مرحبًا، هل أنت مستعد للاختبار؟
+            <button class="pop-up__button">نعم</button>
+        </div>
+
+        <div class="quiz">
+            <div class="quiz__info">
+                <div class="quiz__category">الفئة: <span class="quiz__category-name">اسئلة عامة</span></div>
+                <div class="quiz__count">عدد الأسئلة: <span class="quiz__count-number">10</span></div>
+            </div>
+
+            <div class="quiz__area">
+                <h2 class="quiz__question"></h2>
+            </div>
+
+            <div class="quiz__answers"></div>
+
+            <button class="quiz__submit">إرسال الإجابة</button>
+
+            <div class="quiz__progress">
+                <div class="quiz__bullets"></div> <!-- تم حذف الدوائر اليدوية -->
+                <div class="quiz__timer">
+                    <span class="quiz__seconds">60</span>:<span class="quiz__minutes">2</span>
+                </div>
+            </div>
+
+            <div class="quiz__result"></div>
+        </div>
+    </div>
+
+    <script>
+        const quiz = document.querySelector(".quiz");
+        const questionCountElement = document.querySelector(".quiz__count-number");
+        const bulletsContainer = document.querySelector(".quiz__bullets");
+        const quizQuestionElement = document.querySelector(".quiz__question");
+        const submitButton = document.querySelector(".quiz__submit");
+        const popUp = document.querySelector(".pop-up");
+        const popUpButton = document.querySelector(".pop-up__button");
+        const quizResult = document.querySelector(".quiz__result");
+        const secondsElement = document.querySelector(".quiz__seconds");
+        const minutesElement = document.querySelector(".quiz__minutes");
+
+        let numberOfCorrectAnswers = 0;
+        let questionIndices = [];
+        let timer = null;
+
+        popUpButton.addEventListener("click", startQuiz);
+
+        function startQuiz() {
+            popUp.style.opacity = "0";
+            popUp.style.animation = "none";
+            quiz.style.opacity = "1";
+
+            let [seconds, minutes] = [60, 1];
+            timer = setInterval(() => {
+                seconds--;
+                if (seconds === 0 && minutes === 0) {
+                    showResult();
+                    return;
+                }
+
+                if (seconds === 0 && minutes !== 0) {
+                    minutes--;
+                    seconds = 60;
+                }
+
+                secondsElement.textContent = seconds < 10 ? `0${seconds}` : seconds;
+                minutesElement.textContent = minutes < 10 ? `0${minutes}` : minutes;
+            }, 1000);
+
+            fetchQuestions();
+        }
+
+        function fetchQuestions() {
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    let questions = JSON.parse(this.responseText);
+                    
+                    // اختيار 10 أسئلة عشوائيًا
+                    questions = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+
+                    const totalQuestions = questions.length;
+
+                    createBullets(totalQuestions);
+                    loadRandomQuestion(questions, totalQuestions);
+
+                    submitButton.addEventListener("click", () => {
+                        checkAnswerAndLoadNext(questions, totalQuestions);
+                    });
+                }
+            };
+            request.open("GET", "/static/app/pages/registration/html_question.json", true);
+            request.send();
+        }
+
+        function createBullets(totalQuestions) {
+            bulletsContainer.innerHTML = ""; // حذف أي دوائر سابقة
+            questionCountElement.textContent = totalQuestions;
+
+            for (let i = 0; i < totalQuestions; i++) {
+                const bullet = document.createElement("span");
+                bullet.classList.add("quiz__bullet");
+                if (i === 0) bullet.classList.add("quiz__bullet--active");
+                bulletsContainer.appendChild(bullet);
+            }
+        }
+
+        function loadRandomQuestion(questions, totalQuestions) {
+            if (questionIndices.length >= totalQuestions) {
+                submitButton.style.cursor = "no-drop";
+                submitButton.disabled = true;
+                showResult();
+                return;
+            }
+
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * totalQuestions);
+            } while (questionIndices.includes(randomIndex) && questionIndices.length < totalQuestions);
+
+            questionIndices.push(randomIndex);
+            const currentQuestion = questions[randomIndex];
+            quizQuestionElement.textContent = currentQuestion.title;
+
+            const answersContainer = document.querySelector(".quiz__answers");
+            answersContainer.innerHTML = ""; // مسح الإجابات السابقة
+
+            const allAnswers = [
+                { text: currentQuestion.right_answer, isCorrect: true },
+                { text: currentQuestion.answer_1, isCorrect: false },
+                { text: currentQuestion.answer_2, isCorrect: false },
+                { text: currentQuestion.answer_3, isCorrect: false },
+            ];
+
+            // خلط الإجابات
+            allAnswers.sort(() => Math.random() - 0.5);
+
+            allAnswers.forEach((answer, index) => {
+                const answerId = `answer_${index}`;
+                const answerHTML = `
+                    <div class="quiz__answer">
+                        <input type="radio" id="${answerId}" name="questions" class="quiz__radio">
+                        <label for="${answerId}" class="quiz__label">${answer.text}</label>
+                    </div>
+                `;
+                answersContainer.insertAdjacentHTML("beforeend", answerHTML);
+            });
+        }
+
+        function checkAnswerAndLoadNext(questions, totalQuestions) {
+            const checkedLabel = document.querySelector("input:checked + .quiz__label");
+            const currentQuestionIndex = questionIndices[questionIndices.length - 1];
+
+            if (checkedLabel && checkedLabel.textContent === questions[currentQuestionIndex].right_answer) {
+                numberOfCorrectAnswers++;
+            }
+
+            const bullets = document.querySelectorAll(".quiz__bullet");
+            bullets[questionIndices.length - 1]?.classList.add("quiz__bullet--active");
+
+            loadRandomQuestion(questions, totalQuestions);
+        }
+
+        function showResult() {
+            clearInterval(timer);
+            submitButton.style.cursor = "no-drop";
+            submitButton.disabled = true;
+
+            let resultClass, resultText;
+
+            if (numberOfCorrectAnswers <= 3) {
+                resultClass = "quiz__score--bad";
+                resultText = "سيئ";
+            } else if (numberOfCorrectAnswers <= 6) {
+                resultClass = "quiz__score--good";
+                resultText = "جيد";
+            } else {
+                resultClass = "quiz__score--perfect";
+                resultText = "ممتاز";
+            }
+
+            quizResult.innerHTML = `
+                <span class="quiz__score ${resultClass}">${resultText}</span>
+                لقد أجبت عن  <span class="quiz__score-number">${numberOfCorrectAnswers}</span> من ${questionIndices.length}
+            `;
+        }
+    </script>
+</body>
+</html>

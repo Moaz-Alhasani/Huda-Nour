@@ -1,0 +1,261 @@
+.container--registration {
+    width: 100%;
+    height: 100vh;
+    color: #fff;
+    background-color: #2ca4ab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .form {
+        position: relative;
+        max-width: 250px;
+        background: #1f2125;
+        // height: 70vh;
+        padding: 30px;
+        border-radius: 6px;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+
+        @include breakpoint-up(medium) {
+            width: 70%;
+            // height: 85vh;
+            max-width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, .5);
+        }
+
+        @include breakpoint-up(large) {
+            // height: 70vh;
+        }
+
+        &__title {
+            margin-bottom: 20px;
+
+            @include breakpoint-up(medium) {
+                font-size: 2rem;
+            }
+        }
+
+        &__logo {
+            width: 47px;
+            height: 40px;
+            position: absolute;
+            border: 2px solid #2ca4ab;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+
+        &__input-group {
+            position: relative;
+
+
+
+
+            &--name img,
+            &--email img,
+            &--password img,
+            &--Vcode img {
+                width: 12px;
+                height: 12px;
+                position: absolute;
+                margin-top: 4px;
+                margin-right: 5px;
+
+                @include breakpoint-up(medium) {
+                    width: 20px;
+                    height: 20px;
+                    margin-top: 4px;
+                }
+
+                @include breakpoint-up(large) {
+                    width: 23px;
+                    height: 23px;
+                    margin-top: 4px;
+                }
+
+                @include breakpoint-up(x-large) {
+                    width: 30px;
+                    height: 30px;
+                    margin-top: 10px;
+                }
+            }
+
+            input {
+                width: 100%;
+                border: 2px solid #2ca4ab;
+                outline: none;
+                border-radius: 6px;
+                padding: 3px;
+                margin-bottom: 15px;
+                padding-right: 20px;
+
+                @include breakpoint-up(medium) {
+                    font-size: 1.2rem;
+                    padding-right: 30px;
+                }
+
+                @include breakpoint-up(large) {
+                    width: 440px;
+                    font-size: 1.5rem;
+                    padding-right: 40px;
+                }
+
+                @include breakpoint-up(x-large) {
+                    font-size: 2.5rem;
+                    padding-right: 40px;
+                }
+
+                &::placeholder {
+                    color: gray;
+                    position: relative;
+                    right: 5px;
+                }
+
+                &:focus::placeholder {
+                    color: white;
+                    /* Desired placeholder color on focus */
+                }
+
+            }
+
+            &--name .form__input::placeholder {
+                right: 1px;
+
+                @include breakpoint-up(medium) {
+                    right: 10px;
+                }
+
+                @include breakpoint-up(large) {
+                    right: -2px;
+                }
+
+                @include breakpoint-up(x-large) {
+                    right: 1px;
+                }
+            }
+
+            &--email .form__input::placeholder {
+                right: -91px;
+
+                @include breakpoint-up(medium) {
+                    right: -202px;
+                }
+
+                @include breakpoint-up(large) {
+                    right: -228px;
+                }
+
+                @include breakpoint-up(x-large) {
+                    right: -20px;
+                }
+            }
+
+            &--password .form__input::placeholder {
+                right: -12px;
+
+                @include breakpoint-up(medium) {
+                    right: -87px;
+                }
+
+                @include breakpoint-up(large) {
+                    right: -80px;
+                    font-size: 1.5rem;
+                }
+
+                @include breakpoint-up(x-large) {
+                    right: -8px;
+                    font-size: 1.9rem;
+                }
+            }
+
+            &--Vcode .form__input::placeholder {
+                right: -110px;
+
+                @include breakpoint-up(medium) {
+                    right: -87px;
+                }
+
+                @include breakpoint-up(large) {
+                    right: -80px;
+                    font-size: 1.5rem;
+                }
+
+                @include breakpoint-up(x-large) {
+                    right: -8px;
+                    font-size: 1.9rem;
+                }
+            }
+
+            &-error {
+                display: block;
+                width: 170px;
+                color: red;
+                margin-top: -10px;
+                margin-bottom: 10px;
+
+                @include breakpoint-up(medium) {
+                    font-size: 1.9rem;
+                    width: 350px;
+                }
+
+                img {
+                    position: relative;
+                    top: -10px;
+                }
+            }
+
+        }
+
+        &__button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            @include breakpoint-up(medium) {
+                gap: 10px;
+                margin-top: 10px;
+            }
+        }
+
+        &__button {
+            padding: 5px 15px;
+            border-radius: 12px;
+            background: white;
+            color: #2ca4ab;
+            cursor: pointer;
+            border: 2px solid #2ca4ab;
+
+            @include breakpoint-up(medium) {
+                font-size: 1.2rem;
+            }
+
+            @include breakpoint-up(x-large) {
+                font-size: 2.2rem;
+            }
+
+            &--submit {
+                background: #2ca4ab;
+                color: white;
+                border: 2px solid white;
+            }
+
+            &--signin {
+                background: white;
+                color: #2ca4ab;
+            }
+        }
+
+        &__submit-error {
+            color: red;
+            font-size: 1.9rem;
+        }
+    }
+}
+
+// change the font size of the submit error and move the shared code to a separate file 

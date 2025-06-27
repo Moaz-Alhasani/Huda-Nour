@@ -1,0 +1,221 @@
+.search {
+    min-height: calc(100vh - 55px);
+    background-color: #2ca4ab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    &__box {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+
+
+
+
+        button {
+            width: fit-content;
+            margin: auto;
+            padding: 10px 35px;
+            color: #2ca4ab;
+            border-radius: 24px;
+            border: none;
+            box-shadow: 0px 0px 25px rgba(255, 255, 255, .5215686275);
+            cursor: pointer;
+
+            @include breakpoint-up(medium) {
+                font-size: 1.5rem;
+            }
+
+            @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+        }
+
+    }
+
+    &__hint {
+        color: white;
+
+        @include breakpoint-up(medium) {
+            font-size: 2.5rem;
+        }
+
+        @include breakpoint-up(large) {
+            font-size: 2rem;
+        }
+    }
+
+    &__input-container {
+        position: relative;
+        text-align: center;
+
+        @include breakpoint-up(medium) {
+            width: 400px;
+            margin: auto;
+        }
+
+        @include breakpoint-up(large) {
+            width: 500px;
+            margin: auto;
+        }
+    }
+
+    &__icon {
+        width: 12px;
+        position: absolute;
+        top: 34px;
+        right: 10px;
+
+        @include breakpoint-up(medium) {
+            width: 24px;
+            position: absolute;
+            top: 36px;
+            right: 10px;
+        }
+    }
+
+    &__input {
+        width: 100%;
+        padding: 12px 30px;
+        border-radius: 24px;
+        border: none;
+        outline: none;
+        box-shadow: 0px 0px 25px rgb(255 255 255 / 40%);
+        margin: 20px 0;
+        caret-color: $main-color;
+        color: #2ca4ab;
+
+        @include breakpoint-up(medium) {
+            font-size: 2rem;
+            padding: 12px 45px;
+        }
+        @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+    }
+
+    &__arrow {
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 19px;
+
+        img {
+            width: 30px;
+        }
+    }
+
+}
+
+.results {
+    margin: 0 20px;
+
+    @include breakpoint-up(medium) {
+        display: grid;
+    }
+
+    &__item {
+        min-width: 200px;
+        max-width: 950px;
+        margin: 40px auto;
+        padding: 15px;
+        color: #fff;
+        border-radius: 24px;
+        box-shadow: 0px 0px 25px rgb(44 164 171 / 70%);
+        background-color: #2ca4ab;
+
+        &:not(:first-child) {
+            margin: 40px auto;
+        }
+
+
+    }
+
+    &__number {
+        display: block;
+        text-align: center;
+
+        @include breakpoint-up(medium) {
+            font-size: 1.5rem;
+        }
+        @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+
+        @include breakpoint-up(medium) {
+            font-size: 1.5rem;
+        }
+        @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+    }
+
+    &__body {
+        text-align: center;
+        margin: 13px 0;
+    }
+
+    &__body-title {
+        margin-bottom: 8px;
+
+        @include breakpoint-up(medium) {
+            font-size: 1.5rem;
+        }
+        @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+    }
+
+    &__ayah {
+        padding: 5px 30px;
+        text-align: center;
+
+        @include breakpoint-up(medium) {
+            font-size: 1.5rem;
+        }
+        @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+    }
+
+    &__footer {
+        background-color: white;
+        color: #2ca4ab;
+        border-radius: 24px;
+    }
+
+    &__footer-title {
+        text-align: center;
+        padding-top: 8px;
+
+        @include breakpoint-up(medium) {
+            font-size: 1.5rem;
+        }
+        @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+    }
+
+    &__tafsir {
+        padding: 8px 30px;
+        text-align: center;
+
+        @include breakpoint-up(medium) {
+            font-size: 1.5rem;
+        }
+        @include breakpoint-up(large) {
+                font-size: 2rem;
+            }
+    }
+
+}

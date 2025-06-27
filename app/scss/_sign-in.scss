@@ -1,0 +1,28 @@
+// @import '/app/scss/base/registration-shared';  // Uncomment if needed
+
+/* Forgot Password Link Styling */
+.form {  // Targets class="form" (correct BEM block)
+    // Password input group (block modifier)
+    &__input-group--password {
+        margin: -8px 0 7px;
+        position: relative;
+    }
+
+    // Forgot password link (element)
+    &__forgot-password {
+        color: #2ca4ab;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s, text-decoration 0.3s;
+        display: inline-block;
+        padding: 4px 0;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            color: darken(#2ca4ab, 10%);
+            text-decoration: underline;
+            outline: none;
+        }
+    }
+}

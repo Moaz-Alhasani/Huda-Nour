@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../../../../static/dist/style.css" />
+    <style>
+      /* يمكنك إضافة بعض التنسيقات هنا إذا تريد */
+      .form__input-group-error { color: red; font-size: 0.9rem; }
+      .form__submit-error { color: red; margin-top: 10px; display: none; }
+      .custom-placeholder::placeholder { color: white !important; }
+      .form__forget-password {
+    color: #007BFF;
+    cursor: pointer;
+    font-size: 0.95rem;
+    text-align: right;
+    margin-top: 10px;
+    transition: color 0.3s, transform 0.2s;
+    font-weight: 500;
+        }
+
+        .form__forget-password:hover {
+            color: #0056b3;
+            transform: translateX(-3px);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container--registration">
+        <form class="form" id="sign-in-form" novalidate>
+            <img class="form__logo" src="../../../../static/app/images/R.png" alt="Logo" />
+            <h3 class="form__title">أنشىء حساب :</h3>
+
+            <div class="form__input-group form__input-group--email">
+                <img src="../../../../static/app/images/email.png" alt="email icon" />
+                <img src="../../../../static/app/images/emailWhite.png" style="display: none;" alt="email white icon" />
+                <input 
+                    dir="ltr" 
+                    type="email" 
+                    class="form__input" 
+                    id="email" 
+                    name="email"
+                    placeholder="الأيميل" 
+                    onkeyup="validateEmail()" 
+                    required
+                />
+                <span class="form__input-group-error" id="email-error"></span>
+            </div>
+
+            <div class="form__input-group form__input-group--password">
+                <img src="../../../../static/app/images/password.png" alt="password icon" />
+                <img src="../../../../static/app/images/passwordWhite.png" style="display: none;" alt="password white icon" />
+                <input 
+                    dir="ltr" 
+                    type="password" 
+                    class="form__input" 
+                    id="password" 
+                    name="password"
+                    placeholder="('Passw0rd!') كلمة السر , مثال " 
+                    onkeyup="validatePassword()" 
+                    required
+                />
+                <span class="form__input-group-error" id="password-error"></span>
+            </div>
+
+
+
+            <div class="form__button-group">
+                <button type="submit" class="form__button form__button--submit" id="sign-in">تسجيل الدخول</button>
+                <span class="form__submit-error" id="submit-error"></span>
+                <button type="button" class="form__button form__button--signup" id="sign-up">تسجيل</button>
+            </div>
+        </form>
+    </div>
+
+<script>
+
+
+     document.getElementById("sign-up").addEventListener("click", function() {
+        window.location.href = "http://localhost:5000/api/v1/expert/register-expert";
+        });
+
+    var emailError = document.getElementById("email-error");
+    var passwordError = document.getElementById("password-error");
+    var submitError = document.getElementById("submit-error");
+    var inputFields = document.querySelectorAll(".form__input-group input");
+
+    // تغيير صورة الأيقونات عند التركيز وفقدانه
+    inputFields.forEach(input => {
+        input.addEventListener("focus", () => {
+            input.style.backgroundColor = "#2ca4ab";
+            input.style.color = "white";
+            input.classList.add("custom-placeholder");
+            const imgs = input.parentNode.querySelectorAll("img");
+            if (imgs.length === 2) {
+                imgs[0].style.display = "none";
+                imgs[1].style.display = "block";
+            }
+        });
+        input.addEventListener("blur", () => {
+            input.style.backgroundColor = "white";
+            input.style.color = "#2ca4ab";
+            input.classList.remove("custom-placeholder");
+            const imgs = input.parentNode.querySelectorAll("img");
+            if (imgs.length === 2) {
+                imgs[1].style.display = "none";
+                imgs[0].style.display = "block";
+            }
+        });
+    });
+
+    function validateEmail() {
+        var emailValue = document.getElementById("email").value.trim();
+        if (emailValue.length === 0) {
+            emailError.textContent = "الإيميل مطلوب";
+            return false;
+        }
+        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(emailValue)) {
+            emailError.textContent = "الإيميل غير صالح";
+            return false;
+        }
+        emailError.textContent = "";
+        return true;
+    }
+
+    function validatePassword() {
+        var passwordValue = document.getElementById("password").value;
+        if (passwordValue.length === 0) {
+            passwordError.textContent = "كلمة السر مطلوبة";
+            return false;
+        }
+        passwordError.textContent = "";
+        return true;
+    }
+
+    function validateForm() {
+        if (!validateEmail() || !validatePassword()) {
+            submitError.style.display = "block";
+            submitError.textContent = "أصلح الخطأ للتسجيل";
+            setTimeout(() => { submitError.style.display = "none"; }, 3000);
+            return false;  // يمنع إرسال الفورم
+        }
+        return true;  // يسمح بالإرسال
+    }
+
+    // إرسال بيانات تسجيل الدخول عبر fetch لمنع إعادة تحميل الصفحة
+    document.getElementById("sign-in-form").addEventListener("submit", async function(event) {
+        event.preventDefault(); // منع إعادة تحميل الصفحة
+
+        if (!validateForm()) {
+            return;
+        }
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/v1/expert/login-expert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    window.location.href = "http://localhost:5000/api/v1/expert/writetojson";
+                } else {
+                    submitError.style.display = "block";
+                    submitError.textContent = result.message || "حدث خطأ أثناء تسجيل الدخول";
+                    setTimeout(() => { submitError.style.display = "none"; }, 4000);
+                }
+            } catch (error) {
+                submitError.style.display = "block";
+                submitError.textContent = "تعذر الاتصال بالخادم. حاول مرة أخرى.";
+                setTimeout(() => { submitError.style.display = "none"; }, 4000);
+            }
+});
+
+</script>
+</body>
+</html>

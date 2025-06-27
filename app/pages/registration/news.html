@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأخبار</title>
+    <link rel="stylesheet" href="../../../../static/dist/style.css">
+</head>
+
+<body id="news-body">
+    <header class="header">
+        <div class="overlay has-fade hide-for-desktop"></div>
+        <nav class="container">
+            <a href="http://localhost:5000/" class="header__logo">
+                <img class="nav__logo" src="../../../../static/app/images/R.png" alt="Logo">
+            </a>
+
+            <div id="btnHamburger" class="header__toggle hide-for-desktop">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="header__links hide-for-mobile">
+                <a href="http://localhost:5000/">الرئيسية</a>
+                <a href="http://127.0.0.1:8000/search">البحث في القرآن</a>
+                <a href="http://localhost:5000/api/v1/admin/news">الأخبار</a>
+                <a href="http://localhost:5000/IslamicInfo">معلومات إسلامية أساسية</a>
+                <a href="http://localhost:5000/Quez">إختبار المعلومات</a>
+                <a href="http://localhost:5000/api/v1/user/register">التسجيل</a>
+            </div>
+        </nav>
+
+        <div class="header__menu has-fade hide-for-desktop">
+                <a href="">الرئيسية</a>
+                <a href="http://127.0.0.1:8000/search">البحث في القرآن</a>
+                <a href="http://localhost:5000/api/v1/admin/news">الأخبار</a>
+                <a href="http://localhost:5000/IslamicInfo">معلومات إسلامية أساسية</a>
+                <a href="http://localhost:5000/Quez">إختبار المعلومات</a>
+                <a href="http://localhost:5000/api/v1/user/register">التسجيل</a>
+        </div>
+    </header>
+
+    <div class="posts" id="posts-container">
+    </div>
+
+    <script>
+        async function fetchPosts() {
+            try {
+                const res = await fetch('http://localhost:5000/api/v1/admin/getpost'); // مسار نسبي
+    
+                if (!res.ok) throw new Error("حدث خطأ في الاتصال بالخادم");
+    
+                const result = await res.json();
+                const posts = result.data; // تعديل هنا حسب شكل الرد
+    
+                const container = document.getElementById('posts-container');
+                container.innerHTML = '';
+    
+                posts.forEach(post => {
+                    if (!post.imageUrl) {
+                        console.error('post.imageUrl غير موجود:', post);
+                        return;
+                    }
+
+                    const fileName = post.imageUrl.split('\\').pop();
+                    const imagePath = `/upload/${fileName}`;
+                    
+                    const postElement = document.createElement('div');
+                    postElement.className = 'posts__post appear';
+                    postElement.innerHTML = `
+                        <h2 class="posts__title">${post.title}</h2>
+                        <div class="posts__img-container">
+                            <img class="posts__img" src="${imagePath}" alt="صورة الخبر">
+                        </div>
+                        <p class="posts__content">${post.content}</p>
+                    `;
+                    container.appendChild(postElement);
+                });
+    
+                if (posts.length === 0) {
+                    container.innerHTML = '<p style="text-align:center;">لا توجد أخبار حالياً.</p>';
+                }
+    
+            } catch (error) {
+                console.error(error);
+                document.getElementById('posts-container').innerHTML = '<p style="text-align:center; color:red;">حدث خطأ أثناء جلب البيانات.</p>';
+            }
+        }
+    
+        window.addEventListener('DOMContentLoaded', fetchPosts);
+    </script>
+</body>
+
+</html>  

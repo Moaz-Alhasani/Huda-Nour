@@ -1,0 +1,131 @@
+.info {
+    min-height: calc(100vh - 55px);
+    background-color: #2ca4ab;
+    padding: 2rem 0;
+
+    &__box {
+        max-width: 600px;
+        display: grid;
+        gap: 100px;
+        margin: auto;
+        padding: 0 30px;
+        
+        @include breakpoint-up(medium) {
+            padding: 0;
+        }
+    }
+
+    &__item {
+        background-color: white;
+        color: #2ca4ab;
+        border-radius: 24px;
+        padding: 20px;
+        position: relative;
+        box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.452);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        
+        &.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        &:first-child {
+            margin-top: 30px;
+        }
+        
+        &:last-child {
+            margin-bottom: 30px;
+        }
+    }
+
+    h3 {
+        text-align: center;
+        color: #2ca4ab;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(#2ca4ab, 0.3);
+        padding-bottom: 0.5rem;
+
+        @include breakpoint-up(medium) {
+            font-size: 2rem;
+        }
+        
+        @include breakpoint-up(large) {
+            font-size: 3.5rem;
+        }
+    }
+
+    &__list {
+        margin-top: 10px;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        @include breakpoint-up(medium) {
+            font-size: 2rem;
+        }
+        
+        @include breakpoint-up(large) {
+            font-size: 3.5rem;
+        }
+    }
+
+    p {
+        padding: 10px;
+        text-align: right;
+        margin: 0;
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(#2ca4ab, 0.2);
+        }
+    }
+
+    span {
+        margin-left: 5px;
+        font-weight: bold;
+    }
+
+    // Loading state
+    &__loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 200px;
+        
+        &-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+    }
+
+    // Error state
+    &__error {
+        background-color: white;
+        border-radius: 24px;
+        padding: 2rem;
+        text-align: center;
+        color: #e53e3e;
+        box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.452);
+        
+        i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            border: none !important;
+            color: inherit;
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

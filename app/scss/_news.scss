@@ -1,0 +1,55 @@
+#news-body {
+    background-color: #2ca4ab;
+}
+.posts {
+
+    // just make the post display grid and continue
+    &__post {
+        color: #fff;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 24px;
+        margin: auto;
+        max-width: 500px;
+
+        @include breakpoint-up(medium) {
+            margin-top: 30px ;
+        }
+    
+
+        @include breakpoint-up(large) {
+            max-width: 700px;
+            font-size: 1.7rem;
+            padding: 20px;
+        }
+    }
+
+    &__title {
+        text-align: center;
+        padding: 10px;
+        color: #2ca4ab;
+    }
+
+    &__img-container {
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.452);
+        
+    }
+
+    &__content {
+        line-height: 1.6;
+        background-color: #2ca4ab;
+        color: #fff;
+        border-radius: 24px;
+        padding: 10px;
+    }
+}

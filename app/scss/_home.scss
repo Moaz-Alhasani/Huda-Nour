@@ -1,0 +1,308 @@
+//bring the animation
+.header {
+    z-index: 1;
+    top: 0;
+    box-shadow: 0px 0px 15px 5px #0000004a;
+    // height: 55px;
+    position: sticky;
+    &.open {
+
+        .header__toggle {
+            >span:first-child {
+                transform: rotate(45deg);
+            }
+
+            >span:nth-child(2) {
+                opacity: 0;
+            }
+
+            >span:last-child {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    .overlay {
+        opacity: 0;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-image: linear-gradient(#00000075, transparent);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        background-color: white;
+        padding: 10px ;
+        height: 100%;
+
+        @include breakpoint-up(large) {
+            justify-content: initial;
+        }
+
+    }
+
+    &__logo {
+        img {
+            width: 35px;
+            height: 27px;
+            @include breakpoint-up(large) {
+                width: 45px;
+                height: 37px;
+            }
+            
+        }
+
+    }
+
+    &__toggle {
+        // Mobile Menu Toggle
+
+        >span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: $main-color;
+            transition: all 300ms ease-in-out;
+            transform-origin: 3px 1px;
+
+            &:not(:last-child) {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        width: calc(100% - 3rem);
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        margin-top: 1.5rem;
+        padding: 1.625rem;
+        border-radius: 5px;
+
+        a {
+            display: block;
+            padding: 0.625rem;
+            color: $main-color;
+            text-align: center;
+            
+            &:not(:last-child) {
+                border-bottom: 1px solid #2ca4ab;
+            }
+            &:last-child{
+                font-weight: bold;
+            }
+            &:hover{
+                background-color: $main-color;
+                color: white;
+            }
+
+
+        }
+    }
+
+    &__links {
+        color: $main-color;
+        @include breakpoint-up(large) {
+            transform: translateX(50%);
+            right: calc(50% - 35px);
+            position: relative;
+        }
+
+        a {
+            position: relative;
+            font-size: $font-sm;
+            transition: color 300ms ease-in-out;
+            margin-right: 32px;
+            transition: 0.6;
+            padding: 5px 12px;
+            border-radius: 24px;
+            color: #2ca4ab;
+            @include breakpoint-up(large) {
+                font-size: 1rem;
+            }
+            @include breakpoint-up(x-large) {
+                font-size: 1.6rem;
+            }
+            &:hover {
+                background-color:#2ca5ab3e;
+            }
+            // &:not(:last-child) {
+            //     margin-right: 32px;
+            // }
+
+            // &::before {
+            //     content: "";
+            //     display: block;
+            //     position: absolute;
+            //     height: 5px;
+            //     left: 0;
+            //     right: 0;
+            //     bottom: -30px;
+            //     // background: linear-gradient(to right, $limeGreen, $brightCyan);
+            //     opacity: 0;
+            //     transition: opacity 300ms ease-in-out;
+            // }
+
+            &:hover {
+                // color: $darkBlue;
+
+                &::before {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.hero {
+    height: calc(100vh - 55px);
+    background-image: url("../../app/images/haj\ 5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -150px;
+    position: relative;
+    overflow: hidden;
+
+    // @include breakpoint-up(medium) {
+    //     background-position: 0;
+    // }
+    @include breakpoint-up(medium) {
+        
+        background-position-y: -550px;
+
+
+    }
+
+    @include breakpoint-up(large) {
+        background-image: url("/app/images/haj\ 8.jpg");
+        background-size: 100% 100vh;
+        background-position-y: 0;
+
+
+    }
+
+    &__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(44, 164, 171, .7803921569);
+        opacity: 1;
+        visibility: visible;
+
+        
+    }
+    // &__first-ayah,
+    // &__second-ayah,
+    // &__third-ayah,
+    // &__fourth-ayah,
+    // &__fifth-ayah,
+    // &__sixth-ayah,
+    // &__seventh-ayah,
+    // &__eighth-ayah {
+    //     color: white;
+    //     position: relative;
+    //     z-index: 2;
+    //     opacity: 0.3;
+    //     text-align: center;
+    //     font-size: 3rem;
+    //     line-height: 2;
+    // }
+    // &__first-ayah {
+       
+    // }
+    // &__second-ayah {
+    // }
+    // &__third-ayah {
+    // }
+    // &__fourth-ayah {
+    // }
+
+    &__title {
+        position: absolute;
+        width: 300px;
+        text-align: center;
+        // z-index: 20;
+        font-size: 2rem;
+        top: 45px;
+        left: 50%;
+        color: white;
+        transform: translateX(-50%);
+
+        @include breakpoint-up(medium) {
+            width: 700px;
+            font-size: 2.5rem;
+            top: 30px;
+        }
+
+        @include breakpoint-up(large) {
+            font-size: 4rem;
+            top: 30px;
+        }
+        @include breakpoint-up(x-large) {
+            font-size: 4.5rem;
+            top: 80px;
+        }
+    }
+}
+
+.services {
+    margin-top: 40px;
+    position: relative;
+    &__grid {
+        display: grid;
+        gap: 20px;
+    }
+}
+
+.service-card {
+    background-color: #2ca4ab;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    &__title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+
+        @include breakpoint-up(large) {
+            font-size: 3rem;
+        }
+    }
+
+    &__description {
+        font-size: 1rem;
+        line-height: 1.6;
+
+        @include breakpoint-up(medium) {
+            padding: 0 170px;
+        }
+
+        @include breakpoint-up(large) {
+            font-size: 2rem;
+        }
+    }
+}
+
+// Global visibility utilities
+.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 10; // Higher than default
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1; // Lower than default
+}

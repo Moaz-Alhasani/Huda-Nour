@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../../../../static/dist/style.css">
+</head>
+
+<body>
+    <div class="container--registration">
+        <form class="form" id="signupForm">
+            <img class="form__logo" src="../../../../static/app/images/R.png" alt="شعار الموقع">
+            <h3 class="form__title">أنشئ حساب جديد:</h3>
+
+            <div class="form__user-type">
+                <div class="form__user-option">
+                    <input type="radio" id="user-type-normal" name="user-type" value="user">
+                    <label for="user-type-normal">مستخدم عادي</label>
+                </div>
+                <div class="form__user-option">
+                    <input type="radio" id="user-type-expert" name="user-type" value="expert" checked>
+                    <label for="user-type-expert">سجل كخبير</label>
+                </div>
+            </div>
+
+            <!-- Full Name Field -->
+            <div class="form__input-group form__input-group--name">
+                <label for="contact-name">
+                    <img src="../../../../static/app/images/person.png" alt="أيقونة الاسم">
+                </label>
+                <img src="../../../../static/app/images/personWhite.png" style="display: none;" alt="أيقونة الاسم النشطة">
+                <input type="text" class="form__input" id="name" name="name" placeholder="الاسم الكامل" onkeyup="validateName()" required>
+                <span class="form__input-group-error" id="name-error"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form__input-group form__input-group--email">
+                <label for="contact-email">
+                    <img src="../../../../static/app/images/email.png" alt="أيقونة البريد">
+                </label>
+                <img src="../../../../static/app/images/emailWhite.png" style="display: none;" alt="أيقونة البريد النشطة">
+                <input dir="ltr" type="email" class="form__input" id="email" name="email" placeholder="البريد الإلكتروني" onkeyup="validateEmail()" required>
+                <span class="form__input-group-error" id="email-error"></span>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form__input-group form__input-group--password">
+                <label for="main-password">
+                    <img src="../../../../static/app/images/password.png" alt="أيقونة كلمة المرور">
+                </label>
+                <img src="../../../../static/app/images/passwordWhite.png" style="display: none;" alt="أيقونة كلمة المرور النشطة">
+                <input dir="ltr" type="password" class="form__input" id="password" name="password" placeholder="كلمة المرور (مثال: Passw0rd!)" onkeyup="validatePassword()" required>
+                <span class="form__input-group-error" id="password-error"></span>
+            </div>
+
+            <!-- Expert-specific PDF upload -->
+            <div class="form__expert-fields" id="expertFields">
+                <div class="form__input-group form__input-group--file">
+                    <input type="file" class="form__input-file" id="profileFilePath" name="profileFilePath" accept=".pdf" required>
+                    <label for="profileFilePath" class="form__file-label">
+                        <span id="file-name">رفع شهادة الخبرة (PDF فقط)</span>
+                        <span class="form__file-button">اختر ملف</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form__button-group">
+                <button class="form__button form__button--submit" id="sign-up" type="submit">تسجيل الحساب</button>
+                <span class="form__submit-error" id="submit-error"></span>
+                <button class="form__button form__button--signin" id="sign-in" type="button">لديك حساب؟ سجل الدخول</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    document.getElementById("user-type-normal").addEventListener("click", function () {
+        window.location.href = "http://localhost:5000/api/v1/user/register";
+    });
+
+    document.getElementById("sign-in").addEventListener("click", function () {
+        window.location.href = "http://localhost:5000/api/v1/expert/login-expert";
+    });
+
+    const nameError = document.getElementById("name-error");
+    const emailError = document.getElementById("email-error");
+    const passwordError = document.getElementById("password-error");
+    const submitError = document.getElementById("submit-error");
+
+    const inputFields = document.querySelectorAll(".form__input-group input");
+
+    inputFields.forEach(e => {
+        e.addEventListener("focus", () => {
+            e.style.backgroundColor = "#2ca4ab";
+            e.style.color = "white";
+            e.classList.add("custom-placeholder");
+            e.parentNode.children[0].style.display = "none";
+            e.parentNode.children[1].style.display = "block";
+        });
+
+        e.addEventListener("blur", () => {
+            e.style.backgroundColor = "white";
+            e.style.color = "#2ca4ab";
+            e.classList.remove("custom-placeholder");
+            e.parentNode.children[1].style.display = "none";
+            e.parentNode.children[0].style.display = "block";
+        });
+    });
+
+    function validateName() {
+        const name = document.getElementById("name").value.trim();
+        if (name.length === 0) {
+            nameError.innerText = "الاسم الكامل مطلوب";
+            return false;
+        }
+        if (!name.match(/^[\u0621-\u064A\s]{2,}$/)) {
+            nameError.innerText = "يجب أن يكون الاسم الكامل باللغة العربية";
+            return false;
+        }
+        nameError.innerText = "";
+        return true;
+    }
+
+    function validateEmail() {
+        const email = document.getElementById("email").value;
+        if (email.length === 0) {
+            emailError.innerText = "الإيميل مطلوب";
+            return false;
+        }
+        if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+            emailError.innerText = "صيغة الإيميل غير صحيحة";
+            return false;
+        }
+        emailError.innerText = "";
+        return true;
+    }
+
+    function validatePassword() {
+        const password = document.getElementById("password").value;
+        if (password.length === 0) {
+            passwordError.innerText = "كلمة السر مطلوبة";
+            return false;
+        }
+        if (!password.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+            passwordError.innerText = "كلمة السر ضعيفة";
+            return false;
+        }
+        passwordError.innerText = "";
+        return true;
+    }
+
+    const expertFields = document.getElementById("expertFields");
+    const userTypeRadio = document.getElementsByName("user-type");
+
+    userTypeRadio.forEach(radio => {
+        radio.addEventListener("change", () => {
+            if (radio.value === "expert" && radio.checked) {
+                expertFields.style.display = "block";
+            } else {
+                expertFields.style.display = "none";
+            }
+        });
+
+        if (radio.value === "expert" && radio.checked) {
+            expertFields.style.display = "block";
+        }
+    });
+
+    // تحديث اسم الملف بعد الاختيار
+    document.getElementById("profileFilePath").addEventListener("change", function () {
+        const fileNameSpan = document.getElementById("file-name");
+        if (this.files.length > 0) {
+            fileNameSpan.textContent = this.files[0].name;
+        } else {
+            fileNameSpan.textContent = "رفع شهادة الخبرة (PDF فقط)";
+        }
+    });
+
+    document.getElementById("signupForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        if (!validateName() || !validateEmail() || !validatePassword()) {
+            submitError.innerText = "أصلح الأخطاء للتسجيل";
+            submitError.style.display = "block";
+            setTimeout(() => {
+                submitError.style.display = "none";
+            }, 3000);
+            return;
+        }
+
+        const userType = document.querySelector('input[name="user-type"]:checked').value;
+
+        // استخدام FormData بدلاً من JSON
+        const formData = new FormData();
+        formData.append("name", document.getElementById("name").value);
+        formData.append("email", document.getElementById("email").value);
+        formData.append("password", document.getElementById("password").value);
+        formData.append("profileFilePath", document.getElementById("profileFilePath").files[0]);
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/v1/expert/register-expert`, {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                window.location.href = "/";
+            } else {
+                submitError.innerText = result.message || "فشل في التسجيل";
+                submitError.style.display = "block";
+            }
+        } catch (error) {
+            console.error(error);
+            alert("حدث خطأ أثناء التسجيل");
+        }
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../../../static/dist/style.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>لوحة التحكم</h2>
+        </div>
+        <div class="sidebar-menu">
+            <h2>إدارة البيانات</h2>
+            <ul>
+                <li>
+                    <a href="#engineDS" class="nav-link" data-section="engine-section">
+                        <span>مجموعة بيانات المحرك</span>
+                        <i class="fas fa-cogs"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Engine Dataset Section -->
+        <div id="engineDS" class="content-section">
+            <div class="dataset-form-container">
+                <div class="dataset-form">
+                    <div class="form-header">
+                        <h2><i class="fas fa-database"></i> إضافة بيانات جديدة للمحرك</h2>
+                    </div>
+                    <form id="engineDatasetForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="topic">الموضوع الرئيسي</label>
+                                <input type="text" id="topic" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subtopic">الموضوع الفرعي</label>
+                                <input type="text" id="subtopic" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surah">السورة</label>
+                            <input type="text" id="surah" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ayah">نص الآية</label>
+                            <textarea id="ayah" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tafsir">التفسير</label>
+                            <textarea id="tafsir" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i> حفظ البيانات
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ====================== ENGINE DATASET MANAGEMENT ====================== //
+    document.getElementById('engineDatasetForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = {
+            main_topic: document.getElementById('topic').value.trim(),
+            sub_topic: document.getElementById('subtopic').value.trim(),
+            surah: document.getElementById('surah').value.trim(),
+            ayah: document.getElementById('ayah').value.trim(),
+            tafsir: document.getElementById('tafsir').value.trim()
+        };
+
+        if (!validateForm(formData)) return;
+
+        submitEngineData(formData);
+    });
+
+    function validateForm(formData) {
+        const fieldNames = {
+            main_topic: 'الموضوع الرئيسي',
+            sub_topic: 'الموضوع الفرعي',
+            surah: 'السورة',
+            ayah: 'نص الآية',
+            tafsir: 'التفسير'
+        };
+
+        for (const [key, value] of Object.entries(formData)) {
+            if (!value) {
+                alert(`الرجاء إدخال ${fieldNames[key]}`);
+                const htmlId = key === "main_topic" ? "topic" :
+                            key === "sub_topic" ? "subtopic" :
+                            key;
+                document.getElementById(htmlId).focus();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function submitEngineData(formData) {
+        const submitBtn = document.querySelector('#engineDatasetForm .submit-btn');
+        const originalBtnText = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+
+        fetch('http://localhost:5000/api/v1/expert/writetojson', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('حدث خطأ في الحفظ');
+            return res.json();
+        })
+        .then(data => {
+            alert('✅ تم حفظ البيانات بنجاح');
+            document.getElementById('engineDatasetForm').reset();
+        })
+        .catch(error => {
+            alert('❌ فشل حفظ البيانات');
+            console.error('Save error:', error);
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البحث في القرآن</title>
+    <link rel="stylesheet" href="../../../../static/dist/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="overlay has-fade hide-for-desktop"></div>
+        <nav class="container">
+            <a href="/" class="header__logo">
+                <img class="nav__logo" src="../../../../static/app/images/R.png" alt="Logo">
+            </a>
+
+            <div href="" id="btnHamburger" class="header__toggle hide-for-desktop">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="header__links hide-for-mobile">
+                <a href="http://localhost:5000/">الرئيسية</a>
+                <a href="http://127.0.0.1:8000/search">البحث في القرآن</a>
+                <a href="http://localhost:5000/api/v1/admin/news">الأخبار</a>
+                <a href="">معلومات إسلامية أساسية</a>
+                <a href="http://localhost:5000/Quez">إختبار المعلومات</a>
+                <a href="http://localhost:5000/api/v1/user/register">التسجيل</a>
+
+
+            </div>
+        </nav>
+        <div class="header__menu has-fade hide-for-desktop">
+            <a href="">الرئيسية</a>
+            <a href="">البحث في القرآن</a>
+            <a href="">الأخبار</a>
+            <a href="">معلومات إسلامية أساسية</a>
+            <a href="">إختبار المعلومات</a>
+            <a href="">التسجيل</a>
+
+        </div>
+
+
+    </header>
+    <div class="search">
+        <form id="searchForm" class="search__box">
+            <p class="search__hint">ابحث عن الآيات بالمعنى، الموضوع، أو العبارة</p>
+            <div class="search__input-container">
+                <img class="search__icon" src="../../../app/images/search.png" alt="">
+                <input id="searchInput" class="search__input" type="text" placeholder=" " name="query">
+            </div>
+            <button type="submit" class="search__button">بحث</button>
+            <div class="search__arrow"><img class="slide" id="downArrow" src="../../../app/images/downArrow.png" alt=""></div>
+        </form>
+    </div>
+
+    <h3 class="main-title">النتائج</h3>
+
+    <div class="results">
+        <div class="results__item">
+            <span class="results__number">النتيجة : 1</span>
+            <div class="results__header">
+                <span class="results__topic">النساء</span>
+                <span class="results__subtopic">الحجاب</span>
+            </div>
+            <div class="results__body">
+                <h3 class="results__body-title"> سورة الأحزاب</h3>
+                <!-- try to put the ayah inside {} -->
+                <p class="results__ayah"> يَا أَيُّهَا النَّبِيُّ قُل لِّأَزْوَاجِكَ وَبَنَاتِكَ وَنِسَاءِ
+                    الْمُؤْمِنِينَ يُدْنِينَ عَلَيْهِنَّ مِن جَلَابِيبِهِنَّ ۚ ذَٰلِكَ أَدْنَىٰ أَن يُعْرَفْنَ فَلَا
+                    يُؤْذَيْنَ ۗ وَكَانَ اللَّهُ غَفُورًا رَّحِيمًا</p>
+            </div>
+            <div class="results__footer">
+                <h3 class="results__footer-title">التفسير</h3>
+                <p class="results__tafsir"> أيها النبي قل لأزواجك وبناتك ونساء المؤمنين يرخين على رؤوسهن ووجوههن من
+                    أرديتهن وملاحفهن؛ لستر وجوههن وصدورهن ورؤوسهن؛ ذلك أقرب أن يميَّزن بالستر والصيانة، فلا يُتعَرَّض
+                    لهن بمكروه أو أذى. وكان الله غفورًا رحيمًا حيث غفر لكم ما سلف، ورحمكم بما أوضح لكم من الحلال
+                    والحرام.</p>
+            </div>
+        </div>
+        <div class="results__item">
+            <span class="results__number">النتيجة : 1</span>
+            <div class="results__header">
+                <span class="results__topic">النساء</span>
+                <span class="results__subtopic">الحجاب</span>
+            </div>
+            <div class="results__body">
+                <h3 class="results__body-title"> سورة الأحزاب</h3>
+                <!-- try to put the ayah inside {} -->
+                <p class="results__ayah"> يَا أَيُّهَا النَّبِيُّ قُل لِّأَزْوَاجِكَ وَبَنَاتِكَ وَنِسَاءِ
+                    الْمُؤْمِنِينَ يُدْنِينَ عَلَيْهِنَّ مِن جَلَابِيبِهِنَّ ۚ ذَٰلِكَ أَدْنَىٰ أَن يُعْرَفْنَ فَلَا
+                    يُؤْذَيْنَ ۗ وَكَانَ اللَّهُ غَفُورًا رَّحِيمًا</p>
+            </div>
+            <div class="results__footer">
+                <h3 class="results__footer-title">التفسير</h3>
+                <p class="results__tafsir"> أيها النبي قل لأزواجك وبناتك ونساء المؤمنين يرخين على رؤوسهن ووجوههن من
+                    أرديتهن وملاحفهن؛ لستر وجوههن وصدورهن ورؤوسهن؛ ذلك أقرب أن يميَّزن بالستر والصيانة، فلا يُتعَرَّض
+                    لهن بمكروه أو أذى. وكان الله غفورًا رحيمًا حيث غفر لكم ما سلف، ورحمكم بما أوضح لكم من الحلال
+                    والحرام.أيها النبي قل لأزواجك وبناتك ونساء المؤمنين يرخين على رؤوسهن ووجوههن من أرديتهن وملاحفهن؛
+                    لستر وجوههن وصدورهن ورؤوسهن؛ ذلك أقرب أن يميَّزن بالستر والصيانة، فلا يُتعَرَّض لهن بمكروه أو أذى.
+                    وكان الله غفورًا رحيمًا حيث غفر لكم ما سلف، ورحمكم بما أوضح لكم من الحلال والحرام.</p>
+            </div>
+        </div>
+        <div class="results__item">
+            <span class="results__number">النتيجة : 1</span>
+            <div class="results__header">
+                <span class="results__topic">النساء</span>
+                <span class="results__subtopic">الحجاب</span>
+            </div>
+            <div class="results__body">
+                <h3 class="results__body-title"> سورة الأحزاب</h3>
+                <!-- try to put the ayah inside {} -->
+                <p class="results__ayah"> يَا أَيُّهَا النَّبِيُّ قُل لِّأَزْوَاجِكَ وَبَنَاتِكَ وَنِسَاءِ
+                    الْمُؤْمِنِينَ يُدْنِينَ عَلَيْهِنَّ مِن جَلَابِيبِهِنَّ ۚ ذَٰلِكَ أَدْنَىٰ أَن يُعْرَفْنَ فَلَا
+                    يُؤْذَيْنَ ۗ وَكَانَ اللَّهُ غَفُورًا رَّحِيمًا</p>
+            </div>
+            <div class="results__footer">
+                <h3 class="results__footer-title">التفسير</h3>
+                <p class="results__tafsir"> أيها النبي قل لأزواجك وبناتك ونساء المؤمنين يرخين على رؤوسهن ووجوههن من
+                    أرديتهن وملاحفهن؛ لستر وجوههن وصدورهن ورؤوسهن؛ ذلك أقرب أن يميَّزن بالستر والصيانة، فلا يُتعَرَّض
+                    لهن بمكروه أو أذى. وكان الله غفورًا رحيمًا حيث غفر لكم ما سلف، ورحمكم بما أوضح لكم من الحلال
+                    والحرام.</p>
+            </div>
+        </div>
+    </div>
+    <script src="/app/js/search.js"></script>
+</body>
+
+</html>

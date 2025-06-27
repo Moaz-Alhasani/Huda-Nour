@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify</title>
+    <link rel="stylesheet" href="../../../../static/dist/style.css">
+</head>
+
+<body>
+    <div class="container--registration">
+        <form class="form" onsubmit="return validateCode()">
+            <!-- Header Section -->
+            <div class="reset-password-email-header">
+                <h1>التحقق</h1>
+                <img class="left-arrow" src="../../../../static/app/images/leftArrow.png" alt="Go Back">
+            </div>
+
+            <!-- Main Image -->
+            <img class="main-reset-password-img" src="../../../../static/app/images/6647972.jpg" alt="Verification Illustration">
+
+            <!-- Description Text -->
+            <p class="main-reset-password-text">أدخل رمز التحقق المكون من ستة أرقام</p>
+
+            <!-- Verification Code Input -->
+            <div class="form__input-group form__input-group--Vcode">
+                <label for="verify-code">
+                    <img src="../../../../static/app/images/key.png" alt="Key Icon">
+                </label>
+                <img src="../../../../static/app/images/keyWhite.png" style="display: none;" alt="Key Icon Active">
+                <input dir="ltr" type="text" class="form__input" id="verify-code" placeholder="" required maxlength="6">
+                <span class="form__input-group-error" id="code-error"></span>
+            </div>
+
+            <div class="form__button-group">
+                <button class="form__button form__button--submit" type="submit">تحقق</button>
+                <span class="form__submit-error" id="submit-error"></span>
+            </div>
+        </form>
+    </div>
+    <!-- make the js file and don't forget the error  -->
+    <script >
+
+        document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector(".form");
+    const codeInput = document.getElementById("verify-code");
+    const codeError = document.getElementById("code-error");
+    const submitError = document.getElementById("submit-error");
+
+    // تأكد أن الكود هو 6 أرقام فقط
+    function validateCodeInput() {
+        const code = codeInput.value.trim();
+        if (code.length === 0) {
+            codeError.textContent = "الرجاء إدخال رمز التحقق";
+            return false;
+        }
+        if (!/^\d{6}$/.test(code)) {
+            codeError.textContent = "رمز التحقق يجب أن يكون مكونًا من 6 أرقام";
+            return false;
+        }
+        codeError.textContent = "";
+        return true;
+    }
+
+    codeInput.addEventListener("input", validateCodeInput);
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        submitError.style.display = "none";
+
+        if (!validateCodeInput()) {
+            submitError.style.color = "red";
+            submitError.style.display = "block";
+            submitError.textContent = "يرجى تصحيح رمز التحقق";
+            setTimeout(() => (submitError.style.display = "none"), 3000);
+            return;
+        }
+
+        const otp = codeInput.value.trim();
+
+        fetch("http://localhost:5000/api/v1/user/vrefiyotp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ otp }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("فشل التحقق من رمز التحقق");
+                }
+            if (response.ok) {
+                window.location.href = "http://localhost:5000/api/v1/user/resetpassword";
+            }
+                return response.json();
+            })
+            .then((data) => {
+                submitError.style.color = "green";
+                submitError.style.display = "block";
+                submitError.textContent = "تم التحقق بنجاح";
+                // هنا يمكنك إضافة أي عملية تريدها بعد النجاح، مثلاً إعادة توجيه الصفحة
+                setTimeout(() => (submitError.style.display = "none"), 4000);
+            })
+            .catch((error) => {
+                submitError.style.color = "red";
+                submitError.style.display = "block";
+                submitError.textContent = "حدث خطأ أثناء التحقق، حاول مرة أخرى";
+                console.error("Error:", error);
+                setTimeout(() => (submitError.style.display = "none"), 3000);
+            });
+    });
+});
+
+    </script>
+</body>
+
+</html>

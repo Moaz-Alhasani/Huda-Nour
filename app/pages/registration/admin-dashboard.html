@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../../dist/style.css">
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>لوحة التحكم</h2>
+        </div>
+
+        <div class="sidebar-menu">
+            <h2>إدارة المستخدمين</h2>
+            <ul>
+                <li class="active">
+                    <a href="#users" class="nav-link" data-section="users-section">
+                        <span>عرض وحذف المستخدمين</span>
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li class="active">
+                    <a href="#experts" class="nav-link" data-section="users-section">
+                        <span>عرض وحذف الخبراء </span>
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <h2>إدارة البيانات</h2>
+            <ul>
+                <!-- <li>
+                    <a href="#islamicContent" class="nav-link" data-section="information-section">
+                        <span>مجموعة بيانات المعلومات</span>
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="#postsDS" class="nav-link" data-section="posts-section">
+                        <span>مجموعة بيانات المنشورات</span>
+                        <i class="fas fa-newspaper"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#quizDS" class="nav-link" data-section="quiz-section">
+                        <span>مجموعة بيانات الاختبارات</span>
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Users Section -->
+        <div id="users" class="content-section active">
+            <h1>إدارة المستخدمين</h1>
+            <div class="table-container">
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>الاسم</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>تاريخ التسجيل</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Users will be loaded here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- experts  -->
+
+        <!-- Experts Section -->
+        <div id="experts" class="content-section">
+            <h1>إدارة الخبراء</h1>
+            <div class="table-container">
+                <table id="expertsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>الاسم</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>تاريخ التسجيل</th>
+                            <th>الحالة</th> <!-- Added this column -->
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Experts will be loaded here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+  
+<!-- islamic content section  -->
+
+
+
+        <!-- <div id="islamicContent" class="content-section">
+            <div class="section-header">
+                <h1>المحتوى الإسلامي</h1>
+                <button id="addIslamicContent" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> إضافة محتوى جديد
+                </button>
+            </div>
+
+            <div class="islamic-content-cards">
+        
+                <div class="content-card" data-id="1">
+                    <div class="card-header">
+                        <h3>أركان الإسلام</h3>
+                        <div class="card-actions">
+                            <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>1. الشهادتان: شهادة أن لا إله إلا الله وأن محمداً رسول الله</p>
+                        <p>2. إقام الصلاة</p>
+                        <p>3. إيتاء الزكاة</p>
+                        <p>4. صوم رمضان</p>
+                        <p>5. حج البيت لمن استطاع إليه سبيلاً</p>
+                    </div>
+                </div>
+
+
+                <div class="content-card" data-id="2">
+                    <div class="card-header">
+                        <h3>أركان الإيمان</h3>
+                        <div class="card-actions">
+                            <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>1. الإيمان بالله</p>
+                        <p>2. الإيمان بالملائكة</p>
+                        <p>3. الإيمان بالكتب السماوية</p>
+                        <p>4. الإيمان بالرسل</p>
+                        <p>5. الإيمان باليوم الآخر</p>
+                        <p>6. الإيمان بالقدر خيره وشره</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contentModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="modalTitle">إضافة محتوى جديد</h2>
+                    <form id="contentForm">
+                        <input type="hidden" id="contentId">
+                        <div class="form-group">
+                            <label for="contentTitle">العنوان</label>
+                            <input type="text" id="contentTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contentText">المحتوى (اكتب كل نقطة في سطر جديد)</label>
+                            <textarea id="contentText" rows="8" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">حفظ</button>
+                    </form>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- news   -->
+<!-- Posts Section -->
+<div id="postsDS" class="content-section">
+    <div class="section-header">
+        <h1>إدارة المنشورات</h1>
+        <button id="addPostBtn" class="btn btn-primary">
+            <i class="fas fa-plus"></i> إضافة منشور جديد
+        </button>
+    </div>
+
+    <div class="posts-container">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i> جاري تحميل المنشورات...
+        </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div id="postModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closePostModal" style="cursor: pointer;">&times;</span>
+            <h2 id="postModalTitle">إضافة منشور جديد</h2>
+                <form id="postForm" enctype="multipart/form-data">
+                    <input type="hidden" id="postId" name="postId" value="">
+
+                    <div class="form-group">
+                        <label for="postTitle">عنوان المنشور</label>
+                        <input type="text" id="postTitle" name="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postImage">رفع الصورة</label>
+                        <input type="file" name="imageUrl" id="postImage" />
+                        <img id="imagePreview" style="max-width: 100px; margin-top: 10px; display: none;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postContent">محتوى المنشور</label>
+                        <textarea id="postContent" name="content" rows="8" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">حفظ المنشور</button>
+                        <button type="button" class="btn btn-secondary" id="cancelPost">إلغاء</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+        <!-- quiz  -->
+
+
+        <!-- Add this to your main-content div -->
+        <div id="quizDS" class="content-section">
+            <div class="section-header">
+                <h1>إدارة الاختبارات</h1>
+                <button id="addQuizBtn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> إضافة سؤال جديد
+                </button>
+            </div>
+
+            <div class="quiz-questions-container">
+                <!-- Sample Question 1 -->
+                <div class="quiz-card" data-id="1">
+                    <div class="quiz-header">
+                        <h3>سؤال #1</h3>
+                        <div class="quiz-actions">
+                            <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="quiz-content">
+                        <div class="quiz-question">
+                            <strong>السؤال:</strong>
+                            <p>ما هي أركان الإسلام الخمسة؟</p>
+                        </div>
+                        <div class="quiz-answers">
+                            <div class="answer-option">
+                                <strong>الإجابة 1:</strong>
+                                <p>الصلاة، الزكاة، الصوم، الحج، الجهاد</p>
+                            </div>
+                            <div class="answer-option">
+                                <strong>الإجابة 2:</strong>
+                                <p>الشهادتان، الصلاة، الصوم، الحج، الإيمان بالقدر</p>
+                            </div>
+                            <div class="answer-option">
+                                <strong>الإجابة 3:</strong>
+                                <p>الصلاة، الزكاة، الصوم، الحج، بر الوالدين</p>
+                            </div>
+                            <div class="answer-option correct-answer">
+                                <strong>الإجابة الصحيحة:</strong>
+                                <p>الشهادتان، الصلاة، الزكاة، الصوم، الحج</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sample Question 2 -->
+                <div class="quiz-card" data-id="2">
+                    <div class="quiz-header">
+                        <h3>سؤال #2</h3>
+                        <div class="quiz-actions">
+                            <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="quiz-content">
+                        <div class="quiz-question">
+                            <strong>السؤال:</strong>
+                            <p>كم عدد أركان الإيمان؟</p>
+                        </div>
+                        <div class="quiz-answers">
+                            <div class="answer-option">
+                                <strong>الإجابة 1:</strong>
+                                <p>5 أركان</p>
+                            </div>
+                            <div class="answer-option correct-answer">
+                                <strong>الإجابة الصحيحة:</strong>
+                                <p>6 أركان</p>
+                            </div>
+                            <div class="answer-option">
+                                <strong>الإجابة 3:</strong>
+                                <p>7 أركان</p>
+                            </div>
+                            <div class="answer-option">
+                                <strong>الإجابة 4:</strong>
+                                <p>4 أركان</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Modal -->
+            <div id="quizModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="quizModalTitle">إضافة سؤال جديد</h2>
+                    <form id="quizForm">
+                        <input type="hidden" id="quizId">
+                        <div class="form-group">
+                            <label for="quizQuestion">السؤال</label>
+                            <input type="text" id="quizQuestion" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="answer0">الإجابة 1</label>
+                            <input type="text" id="answer0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="answer1">الإجابة 2</label>
+                            <input type="text" id="answer1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="answer2">الإجابة 3</label>
+                            <input type="text" id="answer2" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="answer3">الإجابة 4</label>
+                            <input type="text" id="answer3" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correctAnswer">الإجابة الصحيحة (اختر رقم الإجابة)</label>
+                            <select id="correctAnswer" required>
+                                <option value="0">الإجابة 1</option>
+                                <option value="1">الإجابة 2</option>
+                                <option value="2">الإجابة 3</option>
+                                <option value="3">الإجابة 4</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">حفظ السؤال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Main initialization when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize the dashboard when page loads
+    initDashboard();
+});
+
+
+//  Initializes the dashboard functionality
+
+function initDashboard() {
+    // Load initial content based on active section in sidebar
+    const activeSection = document.querySelector('.sidebar-menu li.active a').getAttribute('data-section');
+    loadSection(activeSection);
+    // Setup navigation event listeners
+    setupNavigation();
+    // Load users data if users section is active
+    if (activeSection === 'users-section') {
+        loadUsers();
+        loadExperts();
+    }
+}
+
+
+//   Sets up navigation event listeners for sidebar links
+
+function setupNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            // Update active state in sidebar
+            document.querySelectorAll('.sidebar-menu li').forEach(el => {
+                el.classList.remove('active');
+            });
+            this.parentElement.classList.add('active');
+            // Load the selected section content
+            const sectionId = this.getAttribute('data-section');
+            loadSection(sectionId);
+        });
+    });
+}
+
+function loadSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    // Show the selected section
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add('active');
+        // Load specific data if needed
+        if (sectionId === 'users-section') {
+            loadUsers();
+        }
+    }
+}
+
+// ====================== USERS MANAGEMENT ====================== //
+
+//  
+function loadUsers() {
+    showLoading('#usersTable tbody');
+    console.log("⏳ تحميل المستخدمين...");
+    // Fetch users data from JSON file
+    fetch('http://localhost:5000/api/v1/admin/')
+        .then(handleResponse)
+        .then(response => {
+            console.log("✅ تم استلام المستخدمين:", response); 
+            renderUsersTable(response.data);
+        })
+        .catch(error => {
+            showError('#usersTable tbody', 'خطأ في تحميل بيانات المستخدمين');
+            console.error('Error loading users:', error);
+        });
+}
+
+function renderUsersTable(users) {
+    const tableBody = document.querySelector('#usersTable tbody');
+    tableBody.innerHTML = '';
+    // Show message if no users
+    if (users.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center py-4">
+                    لا يوجد مستخدمين مسجلين
+                </td>
+            </tr>
+        `;
+        return;
+    }
+    // Populate table with user data
+    users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td style="color: black;">${index + 1}</td>
+            <td style="color: black;">${(user.firstName || '') + ' ' + (user.lastName || '')}</td>
+            <td style="color: black;">${user.email || '---'}</td>
+            <td style="color: black;">${formatDate(user.createdAt || new Date())}</td>
+            <td>
+                <button class="btn btn-delete" data-id="${user.id}">
+                    <i class="fas fa-trash"></i> <span>حذف</span>
+                </button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+    // Add delete event listeners to all delete buttons
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const userId = this.getAttribute('data-id');
+            deleteUser(userId);
+        });
+    });
+}
+
+function deleteUser(userId) {
+    if (confirm('هل أنت متأكد من رغبتك في حذف هذا المستخدم؟')) {
+        showLoading('#usersTable tbody');
+        // Send DELETE request to server
+        fetch(`http://localhost:5000/api/v1/admin/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(handleResponse)
+            .then(() => {
+                showSuccess('تم حذف المستخدم بنجاح');
+                loadUsers(); // Refresh users list
+            })
+            .catch(error => {
+                showError('#usersTable tbody', 'فشل حذف المستخدم');
+                console.error('Delete error:', error);
+            });
+    }
+}
+
+// Experts management
+function loadExperts() {
+    showLoading('#expertsTable tbody');
+    fetch('http://localhost:5000/api/v1/admin/all-expert')  // Matches your GET /api/admin/experts endpoint
+        .then(handleResponse)
+        .then(response => {
+            console.log("✅ تم استلام الخبراء :", response); 
+            renderExpertsTable(response.data)
+        })
+        .catch(error => {
+            showError('#expertsTable tbody', 'خطأ في تحميل بيانات الخبراء');
+            console.error('Error loading experts:', error);
+        });
+}
+
+function renderExpertsTable(experts) {
+    const tableBody = document.querySelector('#expertsTable tbody');
+    tableBody.innerHTML = '';
+    
+    if (!experts || experts.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center py-4">
+                    لا يوجد خبراء مسجلين
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    experts.forEach((expert, index) => {
+    const isPending = expert.status !== 'APPROVED';
+    let fileUrl = expert.profileFilePath
+        ? `http://localhost:5000/PDF/${expert.profileFilePath.split('\\').pop()}`
+        : null;
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${expert.name || '---'}</td>
+        <td>${expert.email || '---'}</td>
+        <td>${formatDate(expert.createdAt)}</td>
+        <td>${expert.status === 'APPROVED' ? 'مقبول' : 'قيد الانتظار'}</td>
+        <td style="display: flex; flex-direction: row; gap: 5px;">
+            ${isPending && fileUrl ? `
+                <a href="${fileUrl}" download class="btn btn-view">
+                    <i class="fas fa-file-download"></i>
+                    <span>تحميل الملف</span>
+                </a>
+                <button class="btn btn-accept" data-id="${expert.id}">
+                    <i class="fas fa-check"></i>
+                    <span>قبول</span>
+                </button>
+            ` : ''}
+            <button class="btn btn-delete" data-id="${expert.id}">
+                <i class="fas fa-trash"></i>
+                <span>حذف</span>
+            </button>
+        </td>
+    `;
+    tableBody.appendChild(row);
+});
+    // فتح نافذة عرض الملف باستخدام Google Docs Viewer
+    document.querySelectorAll('.btn-view').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const url = this.getAttribute('data-viewer');
+            if(url) {
+                window.open(url, '_blank', 'width=800,height=600');
+            }
+        });
+    });
+
+    // قبول الخبير
+    document.querySelectorAll('.btn-accept').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const expertId = this.getAttribute('data-id');
+            acceptExpert(expertId);
+        });
+    });
+
+    // حذف الخبير
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const expertId = this.getAttribute('data-id');
+            deleteExpert(expertId);
+        });
+    });
+}
+
+
+
+
+
+function acceptExpert(expertId) {
+    if (confirm('هل أنت متأكد من رغبتك في قبول هذا الخبير؟')) {
+        showLoading('#expertsTable tbody');
+        fetch(`http://localhost:5000/api/v1/admin/acceptexpert/${expertId}`, {
+            method: 'POST',  // or patch 
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(handleResponse)
+        .then(() => {
+            showSuccess('تم قبول الخبير بنجاح وسيتم إرسال بريد التأكيد');
+            loadExperts();  // Refresh the table
+        })
+        .catch(error => {
+            showError('#expertsTable tbody', 'فشل في قبول الخبير');
+            console.error('Accept error:', error);
+        });
+    }
+}
+
+function deleteExpert(expertId) {
+    if (confirm('هل أنت متأكد من رغبتك في حذف هذا الخبير؟')) {
+        showLoading('#expertsTable tbody');
+        fetch(`http://localhost:5000/api/v1/admin/delete-expert/${expertId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(handleResponse)
+        .then(() => {
+            showSuccess('تم حذف الخبير بنجاح');
+            loadExperts();  // Refresh the table
+        })
+        .catch(error => {
+            showError('#expertsTable tbody', 'فشل حذف الخبير');
+            console.error('Delete error:', error);
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Helper function to handle API responses
+function handleResponse(response) {
+    if (!response.ok) {
+        return response.json().then(err => {
+            throw new Error(err.message || 'حدث خطأ في الخادم');
+        });
+    }
+    return response.json();
+}
+// ====================== UTILITY FUNCTIONS (Consolidated) ====================== //
+/**
+ * Handles API response
+ */
+function handleResponse(response) {
+    if (!response.ok) {
+        return response.json().then(err => {
+            throw new Error(err.message || 'حدث خطأ في الخادم');
+        });
+    }
+    return response.json();
+}
+
+/**
+ * Formats a date string
+ */
+function formatDate(dateString) {
+    if (!dateString) return '---';
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('ar-EG', options);
+}
+
+/**
+ * Shows loading indicator 
+ */
+function showLoading(selectorOrElement, message = "جاري التحميل...") {
+    const element = typeof selectorOrElement === 'string' ?
+        document.querySelector(selectorOrElement) : selectorOrElement;
+
+    if (element) {
+        if (element.tagName === 'TBODY') {
+            element.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i> ${message}
+                    </td>
+                </tr>
+            `;
+        } else if (element.classList.contains('quiz-questions-container') ||
+            element.classList.contains('islamic-content-cards')) {
+            element.innerHTML = '<div class="loading-spinner"></div>';
+        } else {
+            element.innerHTML = `<div class="spinner">${message}</div>`;
+        }
+    }
+}
+
+/**
+ * Shows success message
+ */
+function showSuccess(message) {
+    // Create a toast notification
+    const alert = document.createElement('div');
+    alert.className = 'alert success';
+    alert.textContent = message;
+    document.body.appendChild(alert);
+    setTimeout(() => alert.remove(), 3000);
+}
+
+/**
+ * Shows error message
+ */
+function showError(selectorOrElement, message) {
+    let element;
+
+    if (selectorOrElement === null) {
+        alert(message);
+        return;
+    }
+
+    element = typeof selectorOrElement === 'string' ?
+        document.querySelector(selectorOrElement) : selectorOrElement;
+
+    if (element) {
+        if (element.tagName === 'TBODY') {
+            element.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center py-4 text-danger">
+                        <i class="fas fa-exclamation-circle"></i> ${message}
+                    </td>
+                </tr>
+            `;
+        } else if (element.classList.contains('quiz-questions-container') ||
+            element.classList.contains('islamic-content-cards')) {
+            element.innerHTML = `<div class="error-message">${message}</div>`;
+        } else {
+            const alert = document.createElement('div');
+            alert.className = 'alert error';
+            alert.textContent = message;
+            element.appendChild(alert);
+            setTimeout(() => alert.remove(), 3000);
+        }
+    }
+}
+
+// ====================== SCROLLING AND NAVIGATION ====================== //
+document.addEventListener('DOMContentLoaded', function () {
+    const navLinks = document.querySelectorAll('.sidebar-menu .nav-link');
+
+    function scrollToSection(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+            const targetPosition = targetSection.offsetTop - 20;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            updateActiveLink(this);
+        }
+    }
+
+    function updateActiveLink(clickedLink) {
+        navLinks.forEach(link => {
+            link.parentElement.classList.remove('active');
+        });
+        clickedLink.parentElement.classList.add('active');
+    }
+
+    function checkActiveSection() {
+        const scrollPosition = window.scrollY + 100;
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                const sectionId = '#' + section.id;
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === sectionId) {
+                        updateActiveLink(link);
+                    }
+                });
+            }
+        });
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', scrollToSection);
+    });
+
+    window.addEventListener('scroll', checkActiveSection);
+    checkActiveSection();
+});
+
+// ====================== ISLAMIC CONTENT MANAGEMENT ====================== //
+// document.addEventListener('DOMContentLoaded', function () {
+//     const modal = document.getElementById('contentModal');
+//     const addBtn = document.getElementById('addIslamicContent');
+//     const closeBtn = document.querySelector('.close');
+//     const form = document.getElementById('contentForm');
+//     const contentContainer = document.querySelector('.islamic-content-cards');
+
+//     loadIslamicContent();
+
+//     addBtn.addEventListener('click', function () {
+//         document.getElementById('modalTitle').textContent = 'إضافة محتوى جديد';
+//         form.reset();
+//         document.getElementById('contentId').value = '';
+//         modal.style.display = 'block';
+//     });
+
+//     closeBtn.addEventListener('click', closeModal);
+
+//     form.addEventListener('submit', handleFormSubmit);
+
+//     window.addEventListener('click', function (e) {
+//         if (e.target === modal) closeModal();
+//     });
+
+//     async function loadIslamicContent() {
+//         try {
+//             showLoading(contentContainer);
+//             const response = await fetch('/api/islamic-content');
+//             const data = await handleResponse(response);
+//             renderContentCards(data);
+//         } catch (error) {
+//             showError(contentContainer, 'فشل تحميل المحتوى');
+//             console.error('Loading error:', error);
+//         }
+//     }
+
+//     async function handleFormSubmit(e) {
+//         e.preventDefault();
+//         const id = document.getElementById('contentId').value;
+//         const title = document.getElementById('contentTitle').value.trim();
+//         const content = document.getElementById('contentText').value.trim();
+
+//         if (!title || !content) {
+//             alert('الرجاء إدخال جميع البيانات المطلوبة');
+//             return;
+//         }
+
+//         const contentData = {
+//             title: title,
+//             content: content.split('\n').filter(item => item.trim() !== '')
+//         };
+
+//         try {
+//             showLoading(contentContainer);
+//             if (id) {
+//                 await updateIslamicContent(id, contentData);
+//                 showSuccess('تم تحديث المحتوى بنجاح');
+//             } else {
+//                 await createIslamicContent(contentData);
+//                 showSuccess('تم إضافة المحتوى بنجاح');
+//             }
+//             await loadIslamicContent();
+//             closeModal();
+//         } catch (error) {
+//             showError(contentContainer, id ? 'فشل تحديث المحتوى' : 'فشل إضافة المحتوى');
+//             console.error('Submission error:', error);
+//         }
+//     }
+
+//     // CRUD operations
+//     async function createIslamicContent(contentData) {
+//         const response = await fetch('/api/islamic-content', {
+//             method: 'POST',
+//             headers: getHeaders(),
+//             body: JSON.stringify(contentData)
+//         });
+//         return handleResponse(response);
+//     }
+
+//     async function updateIslamicContent(id, contentData) {
+//         const response = await fetch(`/api/islamic-content/${id}`, {
+//             method: 'PUT',
+//             headers: getHeaders(),
+//             body: JSON.stringify(contentData)
+//         });
+//         return handleResponse(response);
+//     }
+
+//     async function deleteIslamicContent(id) {
+//         const response = await fetch(`/api/islamic-content/${id}`, {
+//             method: 'DELETE',
+//             headers: getHeaders()
+//         });
+//         return handleResponse(response);
+//     }
+
+//     // UI functions
+//     function renderContentCards(contents) {
+//         contentContainer.innerHTML = '';
+
+//         if (!contents || contents.length === 0) {
+//             contentContainer.innerHTML = `
+//                 <div class="empty-message">
+//                     لا يوجد محتوى متاح
+//                 </div>
+//             `;
+//             return;
+//         }
+
+//         contents.forEach(content => {
+//             const contentItems = content.content
+//                 .map((item, index) => `<p><span>${index + 1}.</span> ${item}</p>`)
+//                 .join('');
+
+//             const card = document.createElement('div');
+//             card.className = 'content-card';
+//             card.dataset.id = content._id;
+//             card.innerHTML = `
+//                 <div class="card-header">
+//                     <h3>${content.title}</h3>
+//                     <div class="card-actions">
+//                         <button class="btn-edit"><i class="fas fa-edit"></i></button>
+//                         <button class="btn-delete"><i class="fas fa-trash"></i></button>
+//                     </div>
+//                 </div>
+//                 <div class="card-content">${contentItems}</div>
+//             `;
+
+//             card.querySelector('.btn-edit').addEventListener('click', () => openEditModal(content));
+//             card.querySelector('.btn-delete').addEventListener('click', () => handleDelete(content._id));
+//             contentContainer.appendChild(card);
+//         });
+//     }
+
+//     function openEditModal(content) {
+//         document.getElementById('modalTitle').textContent = 'تعديل المحتوى';
+//         document.getElementById('contentId').value = content._id;
+//         document.getElementById('contentTitle').value = content.title;
+//         document.getElementById('contentText').value = content.content.join('\n');
+//         modal.style.display = 'block';
+//     }
+
+//     async function handleDelete(id) {
+//         if (!confirm('هل أنت متأكد من حذف هذا المحتوى؟')) return;
+//         try {
+//             showLoading(contentContainer);
+//             await deleteIslamicContent(id);
+//             showSuccess('تم حذف المحتوى بنجاح');
+//             await loadIslamicContent();
+//         } catch (error) {
+//             showError(contentContainer, 'فشل حذف المحتوى');
+//             console.error('Deletion error:', error);
+//         }
+//     }
+
+//     function closeModal() {
+//         modal.style.display = 'none';
+//     }
+
+//     function getHeaders() {
+//         return {
+//             'Content-Type': 'application/json',
+//         };
+//     }
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ====================== posts MANAGEMENT ====================== //
+
+document.addEventListener('DOMContentLoaded', function () {
+    loadPosts();  // نفذ التحميل مباشرة
+
+    document.getElementById('addPostBtn').addEventListener('click', openPostModal);
+    document.getElementById('postForm').addEventListener('submit', handlePostSubmit);
+    document.querySelector('#postModal .close').addEventListener('click', closePostModal);
+    document.getElementById('cancelPost').addEventListener('click', closePostModal);
+});
+
+function loadPosts() {
+    const postsContainer = document.querySelector('.posts-container');
+    postsContainer.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> جاري تحميل المنشورات...</div>';
+
+    fetch('http://localhost:5000/api/v1/admin/getpost')
+        .then(response => response.json())
+        .then(response => {
+            console.log('Response from API:', response);
+            if (!response.data) {
+                postsContainer.innerHTML = `<div class="error-message"><i class="fas fa-exclamation-circle"></i> لا توجد بيانات.</div>`;
+                return;
+            }
+            renderPosts(response.data);
+        })
+        .catch(error => {
+            console.error('Error loading posts:', error);
+            postsContainer.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    حدث خطأ أثناء تحميل المنشورات. يرجى المحاولة مرة أخرى.
+                </div>
+            `;
+        });
+}
+
+function renderPosts(posts) {
+    const postsContainer = document.querySelector('.posts-container');
+
+    if (posts.length === 0) {
+        postsContainer.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-newspaper"></i>
+                <p>لا توجد منشورات متاحة حالياً</p>
+            </div>
+        `;
+        return;
+    }
+
+    postsContainer.innerHTML = '';
+
+    posts.forEach(post => {
+        // إصلاح مسار الصورة: استخراج اسم الملف فقط من المسار المحلي
+        let imageUrl = '';
+        if (post.imageUrl) {
+            const filename = post.imageUrl.split('\\').pop(); // يدعم المسارات مثل C:\Users\...
+            imageUrl = `http://localhost:5000/upload/${filename}`;
+        }
+
+        const postElement = document.createElement('div');
+        postElement.className = 'post-card';
+        postElement.dataset.id = post.id;
+
+        postElement.innerHTML = `
+            <div class="post-header">
+                <h3 class="post-title">${post.title}</h3>
+                <div class="post-actions">
+                    <button class="btn-edit" data-id="${post.id}"><i class="fas fa-edit"></i></button>
+                    <button class="btn-delete" data-id="${post.id}"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            ${imageUrl ? `
+            <div class="post-image-container">
+                <img src="${imageUrl}" alt="${post.title}" class="post-image">
+            </div>
+            ` : ''}
+            <div class="post-content">
+                <p>${post.content}</p>
+            </div>
+        `;
+
+        postsContainer.appendChild(postElement);
+    });
+
+    // Add event listeners to edit/delete buttons
+    document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const postId = this.dataset.id;
+            editPost(postId);
+        });
+    });
+
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const postId = this.dataset.id;
+            deletePost(postId);
+        });
+    });
+}
+
+function openPostModal(post = null) {
+    const modal = document.getElementById('postModal');
+    const form = document.getElementById('postForm');
+    const imagePreview = document.getElementById('imagePreview');
+
+    form.reset();
+    imagePreview.style.display = 'none';
+    imagePreview.src = '';
+
+    if (post) {
+        document.getElementById('postModalTitle').textContent = 'تعديل المنشور';
+        document.getElementById('postId').value = post.id || post._id || '';
+        document.getElementById('postTitle').value = post.title || '';
+        document.getElementById('postContent').value = post.content || '';
+
+        if (post.imageUrl) {
+            const filename = post.imageUrl.split('\\').pop().split('/').pop();
+            imagePreview.src = `http://localhost:5000/upload/${filename}`;
+            imagePreview.style.display = 'block';
+        }
+    } else {
+        document.getElementById('postModalTitle').textContent = 'إضافة منشور جديد';
+        document.getElementById('postId').value = '';
+    }
+
+    modal.style.display = 'block';
+}
+
+// ✅ إغلاق المودال
+function closePostModal() {
+    document.getElementById('postModal').style.display = 'none';
+}
+
+// ✅ إرسال البيانات (إضافة أو تعديل)
+function handlePostSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const postId = form.postId.value.trim();
+    const formData = new FormData(form);
+
+    // console log لبيانات الفورم
+    for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+    }
+
+    if (postId) {
+        updatePost(postId, formData);
+    } else {
+        addPost(formData);
+    }
+}
+
+async function addPost(formData) {
+    try {
+        const response = await fetch('http://localhost:5000/api/v1/admin/add-post', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.message || 'حدث خطأ أثناء الإضافة');
+        }
+
+        alert('تم إضافة المنشور بنجاح');
+        closePostModal();
+        loadPosts();
+        return data; 
+    } catch (error) {
+        alert(error.message || 'حدث خطأ أثناء الإضافة');
+        console.error('Error:', error);
+        throw error; 
+    }
+}
+
+
+async function updatePost(postId, formData) {
+    try {
+        const imageInput = document.getElementById('postImage');
+        if (!imageInput.files[0]) {
+            formData.delete('imageUrl');
+        }
+
+        const response = await fetch(`http://localhost:5000/api/v1/admin/edit-post/${postId}`, {
+            method: 'PUT',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.message || 'حدث خطأ أثناء التعديل');
+        }
+
+        alert('تم تعديل المنشور بنجاح');
+        closePostModal();
+        loadPosts();
+    } catch (error) {
+        alert(error.message || 'حدث خطأ أثناء التعديل');
+        console.error('Error details:', error);
+    }
+}
+function editPost(postId) {
+    fetch(`http://localhost:5000/api/v1/admin/get-post/${postId}`, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) throw response;
+        return response.json();
+    })
+    .then(responseData => {
+        const post = responseData.data || responseData;
+        openPostModal(post);
+    })
+    .catch(error => {
+        alert('حدث خطأ أثناء تحميل المنشور للتعديل');
+        console.error(error);
+    });
+}
+function deletePost(postId) {
+    if (confirm('هل أنت متأكد من حذف هذا المنشور؟')) {
+        fetch(`http://localhost:5000/api/v1/admin/delete-post/${postId}`, {
+            method: 'DELETE'
+        })
+            .then(() => {
+                loadPosts();
+            })
+            .catch(error => {
+                console.error('Error deleting post:', error);
+                alert('حدث خطأ أثناء حذف المنشور');
+            });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ====================== QUIZ MANAGEMENT ====================== //
+
+document.addEventListener('DOMContentLoaded', function () {
+    const quizModal = document.getElementById('quizModal');
+    const quizForm = document.getElementById('quizForm');
+    const quizContainer = document.querySelector('.quiz-questions-container');
+
+    document.getElementById('addQuizBtn').addEventListener('click', openAddModal);
+    quizModal.querySelector('.close').addEventListener('click', closeModal);
+    quizForm.addEventListener('submit', handleSubmit);
+    window.addEventListener('click', (e) => e.target === quizModal && closeModal());
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        const formData = {
+            question: document.getElementById('quizQuestion').value.trim(),
+            options: [
+                document.getElementById('answer0').value.trim(),
+                document.getElementById('answer1').value.trim(),
+                document.getElementById('answer2').value.trim(),
+                document.getElementById('answer3').value.trim()
+            ],
+            correctAnswer: parseInt(document.getElementById('correctAnswer').value)
+        };
+
+        if (!formData.question || formData.options.some(opt => !opt) || isNaN(formData.correctAnswer)) {
+            return alert('Please fill all fields');
+        }
+
+        try {
+            const res = await fetch('http://localhost:5000/api/v1/admin/quez-ask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (!res.ok) throw new Error('Failed to save question');
+            alert('Question added successfully!');
+            closeModal();
+            quizForm.reset();
+        } catch (err) {
+            alert('Failed to add question');
+            console.error('Submit Error:', err);
+        }
+    }
+
+    function openAddModal() {
+        document.getElementById('quizModalTitle').textContent = 'Add New Question';
+        quizForm.reset();
+        quizModal.style.display = 'block';
+    }
+
+    function closeModal() {
+        quizModal.style.display = 'none';
+    }
+});
+
+</script>
+
+</body>
+
+</html>

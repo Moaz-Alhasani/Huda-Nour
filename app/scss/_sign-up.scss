@@ -1,0 +1,119 @@
+// @import '../base/registration-shared'
+
+/* User Type Selection */
+.form__user-type {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.form__user-option {
+    display: flex;
+    align-items: center;
+}
+
+.form__user-option input[type="radio"] {
+    margin-left: 8px;
+}
+
+.form__user-option label {
+    color: white;
+    cursor: pointer;
+}
+
+.form__user-option input[type="radio"]:checked+label {
+    color: #2ca4ab;
+    font-weight: bold;
+}
+
+/* Expert Specific Fields */
+.form__expert-fields {
+    animation: fadeIn 0.3s ease;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* تنسيق حقل رفع الملف للخبراء */
+.form__expert-fields {
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.form__input-group--file {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form__input-file {
+    display: none;
+}
+
+.form__file-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.form__file-label:hover {
+    border-color: #2ca4ab;
+}
+
+.form__file-button {
+    padding: 0.4rem 0.8rem;
+    background-color: #2ca4ab;
+    color: white;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form__file-button:hover {
+    background-color: #269494;
+}
+
+/* تحديد نمط لاسم الملف المرفوع */
+#file-name {
+    font-size: 0.85rem;
+    color: #555;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 70%;
+}
+
+/* تأثير عند إظهار القسم */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
